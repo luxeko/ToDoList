@@ -1,0 +1,190 @@
+* {
+  margin: 0;
+  border: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  scroll-margin-top: 8.5rem;
+}
+
+html::-webkit-scrollbar {
+  width: 1rem;
+}
+
+html::-webkit-scrollbar-track {
+  background: #f7f8fe;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: #5680f9;
+  border-radius: 5rem;
+}
+
+#root {
+  margin: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+#root .title {
+  color: #5680f9;
+  font-size: 25px;
+  text-align: center;
+  margin-bottom: 24px;
+  font-weight: 700;
+}
+
+#root .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 1170px;
+}
+
+#root .container .card {
+  border-radius: 5px;
+  width: 360px;
+  height: 376px;
+  border: 1px solid #e1e4e8;
+  padding: 10px 20px;
+  background-color: #f7f8fe;
+}
+
+#root .container .card .column__header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 20px;
+}
+
+#root .container .card .column__header .column__title .column__item--count {
+  line-height: 30px;
+  width: 32px;
+  background-color: #5680f9;
+  border-radius: 50%;
+  text-align: center;
+  color: #fff;
+  margin-right: 7px;
+  display: inline-block;
+}
+
+#root .container .card .column__header .column__title .column__text {
+  text-transform: uppercase;
+}
+
+#root .container .card .column__header .column__btn {
+  background-color: #5680f9;
+  color: #fff;
+  padding: 5px 7px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+#root .container .card .column__header .column__btn:hover {
+  background-color: #3968f5;
+}
+
+#root .container .card .column__content .task {
+  width: 100%;
+  background-color: #fff;
+  -webkit-box-shadow: 20px 20px 35px #d0d0d0, -20px -20px 35px #ffffff;
+          box-shadow: 20px 20px 35px #d0d0d0, -20px -20px 35px #ffffff;
+  border: 1px solid 1px solid #e1e4e8;
+  margin-bottom: 20px;
+  padding: 15px 10px;
+  border-radius: 5px;
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+#root .container .card .column__content .task .task__time {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+#root .container .card .column__content .task__main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#root .container .card .column__content .task__main .task__content {
+  -webkit-box-flex: 2;
+      -ms-flex-positive: 2;
+          flex-grow: 2;
+  padding-right: 10px;
+  word-wrap: break-word;
+  font-size: 17px;
+}
+
+#root .container .card .column__content .task__main .task__action {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+#root .container .card .column__content .task__main .task__action .task__btn {
+  margin: 0 5px;
+  font-size: 15px;
+}
+
+#root .container .card .column__content .task__main .task__action .task__btn:first-child {
+  color: #5680f9;
+  cursor: pointer;
+  opacity: 0.7;
+  -webkit-transition: 300ms;
+  transition: 300ms;
+}
+
+#root .container .card .column__content .task__main .task__action .task__btn:first-child:hover {
+  opacity: 1;
+}
+
+#root .container .card .column__content .task__main .task__action .task__btn:last-child {
+  color: #ff2f2f;
+  cursor: pointer;
+  opacity: 0.7;
+  -webkit-transition: 300ms;
+  transition: 300ms;
+}
+
+#root .container .card .column__content .task__main .task__action .task__btn:last-child:hover {
+  opacity: 1;
+}
+/*# sourceMappingURL=style.css.map */
