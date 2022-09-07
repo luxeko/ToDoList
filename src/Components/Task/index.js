@@ -24,6 +24,7 @@ const Task = (props) => (
                             defaultValue={props.task.get('content')}
                             onChange={props.handleChangeTaskContent} />
                             <div className="task__editing-action">
+                                
                             <i className="fa-solid fa-check" onClick={props.updateTask}></i>
                             <i className="fa-solid fa-ban" onClick={props.handleCancelEdit}></i>
                             </div>

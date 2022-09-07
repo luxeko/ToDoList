@@ -77,18 +77,18 @@ class App extends Component {
     handleDeleteTask = (cardIndex, taskIndex) => () => {
         const result = window.confirm('Are your sure to delete this task?');
         if (result) {
-          const { cards } = this.state;
-          const updatedCard = cards.updateIn(
-            [cardIndex, 'tasks'],
-            tasks => tasks.remove(taskIndex));
-          this.setState({ cards: fromJS(updatedCard) }, () => {
-            localStorage.setItem('cards', JSON.stringify(updatedCard.toJS()));
-            toast({
-                title: 'Delete',
-                message: 'Xoá thành công',
-                type: 'success',
-                duration: 2000
-            })
+            const { cards } = this.state;
+            const updatedCard = cards.updateIn(
+                [cardIndex, 'tasks'],
+                tasks => tasks.remove(taskIndex));
+            this.setState({ cards: fromJS(updatedCard) }, () => {
+                localStorage.setItem('cards', JSON.stringify(updatedCard.toJS()));
+                toast({
+                    title: 'Delete',
+                    message: 'Xoá thành công',
+                    type: 'success',
+                    duration: 2000
+                })
           });
         }
       }
@@ -103,10 +103,9 @@ class App extends Component {
         const { cards, editingCardIndex, taskContent, editingTaskIndex, time = new Date().toLocaleString() } = this.state;
         const updatedCard = cards.updateIn(
             [editingCardIndex, 'tasks'],
-            tasks => tasks.setIn([editingTaskIndex, 'content'], taskContent),
-            tasks => tasks.setIn([editingTaskIndex, 'time'], time),
+            tasks => tasks.setIn([editingTaskIndex, 'content'], taskContent).setIn([editingTaskIndex, 'time'], time)
         );
-        console.log({ cards, editingCardIndex, taskContent, editingTaskIndex, time });
+        
         this.setState({
             editingCardIndex: '',
             taskContent: '',
@@ -160,42 +159,41 @@ class App extends Component {
             <div id='toast'></div>
             <div className="title">TO DO LIST</div>
             <DragDropContext onDragEnd={this.handleSaveDrag}>
-              <div className="container">
-                {
-                  cards.map((card, cardIndex) => (
-                    <Card key={card.get('id')}
-                      card={card}
-                      handleAddNewTask={this.handleToggleModal}
-                    >
-                      <Droppable droppableId={card.get('id')}>
-                        {
-                          provided => (
-                            <div ref={provided.innerRef}
-                              {...provided.droppableProps}
-                              style={{ minHeight: '300px' }}
-                            >
-                              {
-                                card.get('tasks').map((task, taskIndex) => (
-                                  <Task key={task.get('id')}
-                                    index={taskIndex}
-                                    isEditing={task.get('id') === editedTaskId}
-                                    handleChangeTaskContent={this.handleChangeTaskContent}
-                                    task={task}
-                                    updateTask={this.updateTask}
-                                    handleCancelEdit={this.handleCancelEdit}
-                                    handleChooseEditTask={this.handleChooseEditTask(cardIndex, taskIndex, task.get('id'))}
-                                    handleDeleteTask={this.handleDeleteTask(cardIndex, taskIndex)} />
-                                ))
-                              }
-                              {provided.placeholder}
-                            </div>
-                          )
-                        }
-                      </Droppable>
-                    </Card>
-                  ))
-                }
-              </div>
+                <div className="container">
+                    {
+                    cards.map((card, cardIndex) => (
+                        <Card key={card.get('id')}
+                        card={card}
+                        handleAddNewTask={this.handleToggleModal}
+                        >
+                        <Droppable droppableId={card.get('id')}>
+                            {
+                                provided => (
+                                    <div ref={provided.innerRef}
+                                    {...provided.droppableProps}
+                                    style={{ minHeight: '500px' }}>
+                                    {
+                                        card.get('tasks').map((task, taskIndex) => (
+                                        <Task key={task.get('id')}
+                                            index={taskIndex}
+                                            isEditing={task.get('id') === editedTaskId}
+                                            handleChangeTaskContent={this.handleChangeTaskContent}
+                                            task={task}
+                                            updateTask={this.updateTask}
+                                            handleCancelEdit={this.handleCancelEdit}
+                                            handleChooseEditTask={this.handleChooseEditTask(cardIndex, taskIndex, task.get('id'))}
+                                            handleDeleteTask={this.handleDeleteTask(cardIndex, taskIndex)} />
+                                        ))
+                                    }
+                                    {provided.placeholder}
+                                    </div>
+                                )
+                            }
+                        </Droppable>
+                        </Card>
+                    ))
+                    }
+                </div>
             </DragDropContext>
             {
                 displayModal && <AddNewModal editingCardIndex={editingCardIndex}
