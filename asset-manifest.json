@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/deploy-github/static/css/main.b8f0e296.css",
+    "main.js": "/deploy-github/static/js/main.58e277e1.js",
+    "index.html": "/deploy-github/index.html",
+    "main.b8f0e296.css.map": "/deploy-github/static/css/main.b8f0e296.css.map",
+    "main.58e277e1.js.map": "/deploy-github/static/js/main.58e277e1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b8f0e296.css",
+    "static/js/main.58e277e1.js"
+  ]
+}
