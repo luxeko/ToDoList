@@ -3,7 +3,12 @@ $red: #ff2f2f;
 $white: #fff;
 $border: 1px solid #e1e4e8;
 $background_color: #f7f8fe;
-
+*{
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
 .task {
     width: 100%;
     background-color: $white;

@@ -5,9 +5,9 @@ const AddNewModal = (props) => (
     <div className="AddNewModal">
       <div className="AddNewModal__backdrop"></div>
       <div className="AddNewModal__content">
-        <h4 className="AddNewModal__title">
+        <h3 className="AddNewModal__title">
           CREATE NEW TASK
-        </h4>
+        </h3>
         <div className="AddNewModal__task">
           <input className="AddNewModal__input"
             type="text"

@@ -3,7 +3,12 @@ $red: #ff2f2f;
 $white: #fff;
 $border: 1px solid #e1e4e8;
 $background_color: #f7f8fe;
-
+*{
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
 .App {
     margin: 30px;
     display: flex;
@@ -22,7 +27,7 @@ $background_color: #f7f8fe;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        width: 1170px;
+        width: 1100px;
 
         .card {
             border-radius: 5px;
