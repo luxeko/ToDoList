@@ -171,7 +171,7 @@ class App extends Component {
                                 provided => (
                                     <div ref={provided.innerRef}
                                     {...provided.droppableProps}
-                                    style={{ minHeight: '500px' }}>
+                                    style={{ minHeight: '300px' }}>
                                     {
                                         card.get('tasks').map((task, taskIndex) => (
                                         <Task key={task.get('id')}
