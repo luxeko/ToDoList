@@ -27,44 +27,50 @@ class App extends Component {
     componentDidMount() {
         const cards = localStorage.getItem('cards');
         if (cards) {
-          this.setState({ cards: fromJS(JSON.parse(cards)) });
+            this.setState({ cards: fromJS(JSON.parse(cards)) });
         }
-      }
+    }
     handleToggleModal = (choosenCard = '') => () => {
         this.setState(prevState => ({
           displayModal: !prevState.displayModal,
           editingCardIndex: choosenCard
         }));
-      }
+    }
     handleChangeTaskContent = (e) => this.setState({ taskContent: e.target.value })
-    handleChangeeditingCardIndex = (editingCardIndex) => () => this.setState({ editingCardIndex: editingCardIndex })
+    handleChangeEditingCardIndex = (editingCardIndex) => () => this.setState({ editingCardIndex: editingCardIndex })
 
     handleAddNewTask = () => {
         const { taskContent } = this.state
         if (taskContent.trim() === '') {
-          toast({
-            title: 'Lỗi',
-            message: 'Vui lòng điền thông tin',
-            type: 'error',
-            duration: 2000
-        })
+            toast({
+                title: 'Error',
+                message: 'Vui lòng điền thông tin',
+                type: 'error',
+                duration: 2000
+            })
         } else {
-          const { editingCardIndex, cards } = this.state;
-          const newTask = fromJS({
-            id: uuidv1(),
-            content: taskContent,
-            time: new Date().toLocaleString()
-          });
-          const cardIndex = cards.findIndex(card => card.get('id') === editingCardIndex);
-          const updatedCard = cards.updateIn([cardIndex, 'tasks'], tasks => tasks.push(newTask));
-          this.setState({
-            displayModal: false,
-            editingCardIndex: '',
-            taskContent: '',
-            cards: fromJS(updatedCard)
-          }, () => {
-            localStorage.setItem('cards', JSON.stringify(updatedCard.toJS()));
-          });
+            const { editingCardIndex, cards } = this.state;
+            const newTask = fromJS({
+                id: uuidv1(),
+                content: taskContent,
+                time: new Date().toLocaleString()
+            });
+            const cardIndex = cards.findIndex(card => card.get('id') === editingCardIndex);
+            const updatedCard = cards.updateIn([cardIndex, 'tasks'], tasks => tasks.push(newTask));
+            this.setState({
+                displayModal: false,
+                editingCardIndex: '',
+                taskContent: '',
+                cards: fromJS(updatedCard)
+            }, () => {
+                localStorage.setItem('cards', JSON.stringify(updatedCard.toJS()));
+            });
+            toast({
+                title: 'Create New',
+                message: 'Thêm thông tin thành công',
+                type: 'success',
+                duration: 2000
+            })
         }
     }
 
@@ -93,26 +99,30 @@ class App extends Component {
           editedTaskId: taskId
         })
     }
-    // handleChangeSelectedCard = (selectedCard) => () => {
-    //     this.setState({ selectedCard : selectedCard })
-    //     console.log(selectedCard);
-    // }
-    handleEdit = () => {
-        const { cards, editingCardIndex, taskContent, editingTaskIndex } = this.state;
+    updateTask = () => {
+        const { cards, editingCardIndex, taskContent, editingTaskIndex, time = new Date().toLocaleString() } = this.state;
         const updatedCard = cards.updateIn(
-          [editingCardIndex, 'tasks'],
-          tasks => tasks.setIn([editingTaskIndex, 'content'], taskContent)
+            [editingCardIndex, 'tasks'],
+            tasks => tasks.setIn([editingTaskIndex, 'content'], taskContent),
+            tasks => tasks.setIn([editingTaskIndex, 'time'], time),
         );
+        console.log({ cards, editingCardIndex, taskContent, editingTaskIndex, time });
         this.setState({
-          editingCardIndex: '',
-          taskContent: '',
-          editedTaskId: null,
-          editingTaskIndex: null,
-          cards: fromJS(updatedCard)
-        }, () => {
-          localStorage.setItem('cards', JSON.stringify(updatedCard.toJS()));
+            editingCardIndex: '',
+            taskContent: '',
+            editedTaskId: null,
+            editingTaskIndex: null,
+            cards: fromJS(updatedCard)
+            }, () => {
+                localStorage.setItem('cards', JSON.stringify(updatedCard.toJS()));
         });
-      }
+        toast({
+            title: 'Update',
+            message: 'Update thành công',
+            type: 'success',
+            duration: 2000
+        })
+    }
     handleCancelEdit = () => {
         this.setState({
           editingCardIndex: '',
@@ -120,32 +130,31 @@ class App extends Component {
           editedTaskId: null,
           editingTaskIndex: null
         });
-      }
+    }
     handleSaveDrag = (result) => {
         const { source, destination, reason } = result;
         if (reason === 'DROP' && destination) {
-          const { cards } = this.state;
-          const sourceCardIndex = cards.findIndex(card => card.get('id') === source.droppableId);
-          const task = cards.getIn([sourceCardIndex, 'tasks', source.index]);
-          let updateCard = cards.updateIn(
-            [sourceCardIndex, 'tasks'],
-            tasks => tasks.remove(source.index)
-          );
-          const destinationCardIndex = cards.findIndex(card => card.get('id') === destination.droppableId);
-          updateCard = updateCard.updateIn(
-            [destinationCardIndex, 'tasks'],
-            tasks => tasks.insert(destination.index, task)
-          );
-          this.setState({
-            cards: fromJS(updateCard)
-          }, () => {
-            localStorage.setItem('cards', JSON.stringify(updateCard.toJS()));
-          });
+            const { cards } = this.state;
+            const sourceCardIndex = cards.findIndex(card => card.get('id') === source.droppableId);
+            const task = cards.getIn([sourceCardIndex, 'tasks', source.index]);
+            let updateCard = cards.updateIn(
+                [sourceCardIndex, 'tasks'],
+                tasks => tasks.remove(source.index)
+            );
+            const destinationCardIndex = cards.findIndex(card => card.get('id') === destination.droppableId);
+            updateCard = updateCard.updateIn(
+                [destinationCardIndex, 'tasks'],
+                tasks => tasks.insert(destination.index, task)
+            );
+            this.setState({
+                cards: fromJS(updateCard)
+            }, () => {
+                localStorage.setItem('cards', JSON.stringify(updateCard.toJS()));
+            });
         }
-      }
+    }
     render() {
         const { cards, displayModal, editingCardIndex, taskContent, editedTaskId } = this.state;
-    
         return (
           <div className="App">
             <div id='toast'></div>
@@ -172,7 +181,7 @@ class App extends Component {
                                     isEditing={task.get('id') === editedTaskId}
                                     handleChangeTaskContent={this.handleChangeTaskContent}
                                     task={task}
-                                    handleEdit={this.handleEdit}
+                                    updateTask={this.updateTask}
                                     handleCancelEdit={this.handleCancelEdit}
                                     handleChooseEditTask={this.handleChooseEditTask(cardIndex, taskIndex, task.get('id'))}
                                     handleDeleteTask={this.handleDeleteTask(cardIndex, taskIndex)} />
@@ -189,11 +198,10 @@ class App extends Component {
               </div>
             </DragDropContext>
             {
-              displayModal &&
-              <AddNewModal editingCardIndex={editingCardIndex}
+                displayModal && <AddNewModal editingCardIndex={editingCardIndex}
                 taskContent={taskContent}
                 handleChangeTaskContent={this.handleChangeTaskContent}
-                handleChangeeditingCardIndex={this.handleChangeeditingCardIndex}
+                handleChangeEditingCardIndex={this.handleChangeEditingCardIndex}
                 handleAddNewTask={this.handleAddNewTask}
                 handleToggleModal={this.handleToggleModal()}
                 selectedCard={this.state.selectedCard}
