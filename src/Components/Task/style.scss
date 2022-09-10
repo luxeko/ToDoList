@@ -18,48 +18,51 @@ $background_color: #f7f8fe;
     border-radius: 5px;
     cursor: grab;
 
-    &__editing {
+    .task__editing {
         flex-grow: 2;
         word-wrap: break-word;
         display: flex;
         align-items: center;
         justify-content: space-between;
         box-sizing: border-box;
-    }
-    &__editing-bgr {
-        position: fixed;
-        top: 0;
-        left: 0;
-        background-color: rgba(106, 106, 108, 0.5);
-        width: 100vw;
-        height: 100vh;
-    }
-    &__editor {
-        width: 100%;
-        margin-right: 5px;
-        text-indent: 2px;
-        font-size: 17px;
-        z-index: 9;
-        border: 1px solid #888;
-        padding: 10px 6px;
-        border-radius: 5px;
-    }
-    &__editing-action {
-        display: flex;
-        z-index: 99;
-        i {
-            cursor: pointer;
-            color: #666666;
-            margin-left: 8px;
-            font-size: 18px;
-            &:first-child {
-                color: #49ff06;
-            }
-            &:last-child {
-                color: $red
+
+        .task__editor {
+            width: 100%;
+            margin-right: 5px;
+            text-indent: 2px;
+            font-size: 17px;
+            z-index: 9;
+            border: 1px solid #888;
+            padding: 10px 6px;
+            border-radius: 5px;
+        }
+        .task__editing-action {
+            display: flex;
+            z-index: 99;
+            i {
+                cursor: pointer;
+                color: #666666;
+                margin-left: 8px;
+                font-size: 18px;
+                &:first-child {
+                    color: #49ff06;
+                }
+                &:last-child {
+                    color: $red
+                }
             }
         }
+        .task__editing-bgr {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: rgba(106, 106, 108, 0.5);
+            width: 100vw;
+            height: 100vh;
+        }
     }
+    
+   
     .task__time {
         font-size: 12px;
         color: #666;

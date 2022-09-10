@@ -13,7 +13,9 @@
     align-items: center;
     top: 0;
     left: 0;
+    z-index: 100;
     border: 1px solid #5680f9;
+    
     &__backdrop {
         position: absolute;
         width: 100%;
@@ -37,27 +39,18 @@
         box-sizing: border-box;
         color: #5680f9;
     }
-    &__task-status {
-        margin-top: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    &__radio {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
     &__task {
         margin: 7px 0 25px;
         box-sizing: border-box;
     }
     &__input {
-        line-height: 30px;
+        line-height: 40px;
+        font-size: 15px;
         width: 100%;
         border-radius: 3px;
         border: 1px solid #ccc;
         text-indent: 7px;
+
     }
     &__action {
         text-align: right;

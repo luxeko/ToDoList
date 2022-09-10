@@ -3,7 +3,7 @@
     top: 32px;
     right: 32px;
     z-index: 999999;
-  }
+}
   
   .toast {
     display: flex;
@@ -82,6 +82,7 @@
   
   .toast__body {
     flex-grow: 1;
+
   }
   
   .toast__title {

@@ -30,10 +30,10 @@ html{
 }
 
 .App  {
-    margin: 0 auto;
-    margin: 30px auto 0;
-    overflow: auto;
-    padding: 0 50px;
+    margin: 30px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 
     .title {
         color: $blue;

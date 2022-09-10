@@ -17,19 +17,26 @@ const Card = ({ card, handleAddNewTask, children }) => {
     }
     return (
     <div className="card">
-        <div className="column__header">
-            <h2 className="column__title">
-                <span className="column__item--count">{card.get('tasks').size}</span>
-                <i style={{color: "#ff2f2f"}} className={ classIcon }></i> &nbsp;
-                <span className="column__text">{card.get('title')}</span>
-                
-            </h2>
-            <p className="column__btn" onClick={handleAddNewTask(card.get('id'))}>
-                <i className="fa-solid fa-plus"></i> &nbsp;
-                New task
-            </p>
+        <div className="card__header">
+            <h4 className="card__title">
+                <span className="card__item--count">{card.get('tasks').size}</span>
+                <div>
+                    <i style={{color: "#ff2f2f", margin:"0px 5px 0px 10px", fontSize: "18px"}} className={ classIcon }></i>
+                    <span className="card__text">{card.get('title')}</span>
+                </div>
+            </h4>
+            <div className='card__btn'>
+                <p className="card__btn--add" onClick={handleAddNewTask(card.get('id'))}>
+                    <i style={{marginRight: "5px"}} className="fa-solid fa-plus"></i>
+                    New task
+                </p>
+                <div className='card__action'>
+                    <span className="card__action--filter material-icons-sharp">filter_alt</span>
+                    {/* <span className="card__action--filter material-icons-sharp" onClick={handleSearchTask(card.get('id'))}>filter_alt</span> */}
+                </div>
+            </div>
         </div>
-        <div className="column__content">
+        <div className="card__content">
            {children}
         </div>
     </div>

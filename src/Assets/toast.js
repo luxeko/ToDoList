@@ -1,3 +1,4 @@
+import "./toast.scss";
 export default function toast({title = '', message = '', type = '', duration = 3000}) {
     const main = document.getElementById('toast');
     if(main) {

@@ -24,9 +24,8 @@ const Task = (props) => (
                             defaultValue={props.task.get('content')}
                             onChange={props.handleChangeTaskContent} />
                             <div className="task__editing-action">
-                                
-                            <i className="fa-solid fa-check" onClick={props.updateTask}></i>
-                            <i className="fa-solid fa-ban" onClick={props.handleCancelEdit}></i>
+                                <i className="fa-solid fa-check" onClick={props.updateTask}></i>
+                                <i className="fa-solid fa-ban" onClick={props.handleCancelEdit}></i>
                             </div>
                             <div className="task__editing-bgr" onClick={props.handleCancelEdit}></div>
                         </div>
@@ -36,18 +35,19 @@ const Task = (props) => (
                             {props.task.get('time')}
                         </div>
                         <div className="task__main">
-                          <div className="task__content">
-                            {props.task.get('content')}
-                          </div>
-                          <div className="task__action">
-                            <div className="task__btn" onClick={props.handleChooseEditTask}>
-                                <i className="fa-solid fa-pen-to-square"></i>
+                            <i className="fa-solid fa-bars" style={{marginRight:"10px"}}></i>
+                            <div className="task__content">
+                                {props.task.get('content')}
                             </div>
-                            <div className="task__btn" onClick={props.handleDeleteTask}>
-                                <i className="fa-solid fa-trash-can"></i>
+                            <div className="task__action">
+                                <div className="task__btn" onClick={props.handleChooseEditTask}>
+                                    <i className="fa-solid fa-pen-to-square"></i>
+                                </div>
+                                <div className="task__btn" onClick={props.handleDeleteTask}>
+                                    <i className="fa-solid fa-trash-can"></i>
+                                </div>
                             </div>
-                          </div>
-                        </div>
+                            </div>
                       </Fragment>
                   }
                 </div>
