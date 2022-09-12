@@ -1,4 +1,4 @@
-import React, { Component, useRef, useEffect } from "react";
+import React, { Component } from "react";
 import "./style.scss";
 import toast from "./Assets/toast";
 import { fromJS } from "immutable";
@@ -11,13 +11,13 @@ import styled from "styled-components";
 import { v1 as uuidv1 } from "uuid";
 class App extends Component {
     state = {
-        searchTask: [],
         displayModal: false,
         editingCardIndex: "",
         taskContent: "",
         editingTaskIndex: null,
         editedTaskId: null,
         isSearch: false,
+        searchDate: "",
         cards: fromJS([
             { id: "td", title: "TO_DO", tasks: [] },
             { id: "ip", title: "IN PROGRESS", tasks: [] },
@@ -94,24 +94,21 @@ class App extends Component {
         const getYear = getDateInSearchInput[0];
         const getMonth = getDateInSearchInput[1];
         const getDay = getDateInSearchInput[2];
-
+        const tasks = document.querySelectorAll(".task")
         // chuyển date thành dạng (dd/mm/yyyy)
         const dateTime = getDay + getMonth + getYear;
-
-        const { cards } = this.state;
-        const taskArr = [];
-        cards.map((card, cardIndex) => (
-            card.get("tasks").map((task) => {
-                if(dateTime.trim("") === task.get("time").split(",")[1].replaceAll("/", "").trim("")) {
-                    taskArr.push({
-                        cardID:cardIndex,
-                        arrTask: task
-                    });
-                }
-            })
-        )
-        );
-        this.setState({searchTask: taskArr, isSearch: true})
+        console.log(dateTime);
+        for (let index = 0; index < tasks.length; index++) {
+            const task = tasks[index];
+            if(dateTime === task.querySelectorAll('.task__time')[0].textContent.split(",")[1].replaceAll("/", "").trim("")) {
+                task.style.display = "block"
+            } else {
+                task.style.display = "none"
+            } 
+            if(dateTime === "NaN") {
+                task.style.display = "block"
+            }
+        }
     };
     handleAddNewTask = () => {
         const { taskContent } = this.state;
@@ -239,12 +236,7 @@ class App extends Component {
         //     text-align: center;
         //     color: red;
         // `;
-        const { cards, displayModal, editingCardIndex, taskContent, editedTaskId, searchTask, isSearch } = this.state;
-        console.log(searchTask);
-        const cardAfterSearch = [];
-        searchTask.map(card => {
-            cardAfterSearch.push(card.cardID)
-        })
+        const { cards, displayModal, editingCardIndex, taskContent, editedTaskId} = this.state;
         return (
             <div className="App">
                 <div id="toast"></div>
@@ -272,15 +264,13 @@ class App extends Component {
                 </div>
                 <DragDropContext onDragEnd={this.handleSaveDrag}>
                     <div className="container">
-                        {isSearch && searchTask.length !== 0  ? 
-                        // Hàm in ra các task thoả mãn tìm kiếm
+                        {
                         cards.map((card, cardIndex) => (
                             <Card key={card.get("id")} card={card} handleAddNewTask={this.handleToggleModal}>
                                 <Droppable droppableId={card.get("id")}>
-                                    
                                     {(provided) => (
                                         <div ref={provided.innerRef} {...provided.droppableProps} style={{ minHeight: "300px" }}>
-                                            {cardAfterSearch.map((task, taskIndex) => (
+                                            {card.get("tasks").map((task, taskIndex) => (
                                                 <Task
                                                     key={task.get("id")}
                                                     index={taskIndex}
@@ -300,9 +290,6 @@ class App extends Component {
                                 </Droppable>
                             </Card>
                         ))
-                        :
-                        <div>abcd</div>
-                        
                         }
                     </div>
                 </DragDropContext>
