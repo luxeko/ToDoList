@@ -33,7 +33,7 @@ class App extends Component {
         }
     }
     onScroll() {
-        const cards = document.getElementsByClassName("card");
+        const cards = document.querySelector(".card");
         for (let index = 0; index < cards.length; index++) {
             // eslint-disable-next-line no-loop-func
             cards[index].addEventListener("scroll", () => {
